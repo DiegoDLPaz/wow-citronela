@@ -4,7 +4,7 @@ import {WowCharacter, WowUserProfile} from '../citronela-page/interfaces/profile
 import {EnrichedCharacter} from '../citronela-page/interfaces/EnrichedCharacter.interface';
 import {catchError, forkJoin, map, Observable, of, switchMap, throwError} from 'rxjs';
 import {FactionColorPipe} from '../citronela-page/pipes/faction-color.pipe';
-import {DatePipe, JsonPipe} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {ClassColorPipe} from '../citronela-page/pipes/class-color.pipe';
 
 @Component({
@@ -41,9 +41,7 @@ export class MisPersonajesPageComponent {
     const scope = 'wow.profile'; // The scope for WoW profile data
     const state = this.generateState()
 
-    const authUrl = `https://oauth.battle.net/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${scope}&state=${state}`;
-
-    window.location.href = authUrl;
+    window.location.href = `https://oauth.battle.net/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${scope}&state=${state}`;
   }
 
   generateState() {
