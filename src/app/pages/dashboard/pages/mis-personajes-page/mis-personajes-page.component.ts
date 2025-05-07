@@ -147,7 +147,6 @@ export class MisPersonajesPageComponent {
       characters.map(champ => this.loadFullCharacterInfo(champ))
     ).subscribe(fullList => {
       this.enrichedCharacters.set(fullList);
-      console.log("Pepe",this.enrichedCharacters())
     });
   }
 
