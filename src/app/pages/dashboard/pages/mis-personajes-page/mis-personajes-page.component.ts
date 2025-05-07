@@ -12,8 +12,7 @@ import {ClassColorPipe} from '../citronela-page/pipes/class-color.pipe';
   imports: [
     FactionColorPipe,
     DatePipe,
-    ClassColorPipe,
-    JsonPipe
+    ClassColorPipe
   ],
   templateUrl: './mis-personajes-page.component.html'
 })
@@ -38,7 +37,7 @@ export class MisPersonajesPageComponent {
 
   obtenerPerfil(){
     const clientId = '6ce61a35c09d4d2892a6f7df4e75a04b'; // From Blizzard Developer Portal
-    const redirectUri = 'http://localhost:4200/callback'; // The URI you set earlier
+    const redirectUri = 'https://wow-citronela.netlify.app/#/callback'; // The URI you set earlier
     const scope = 'wow.profile'; // The scope for WoW profile data
     const state = this.generateState()
 
