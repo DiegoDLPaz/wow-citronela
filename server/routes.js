@@ -58,7 +58,7 @@ router.post('/token', async (req, res) => {
     const params = new URLSearchParams();
     params.append('grant_type', 'authorization_code');
     params.append('code', code);
-    params.append('redirect_uri', 'http://localhost:4200/callback');
+    params.append('redirect_uri', 'https://wow-citronela.netlify.app/callback');
 
     const tokenRes = await axios.post('https://oauth.battle.net/token', params, {
       headers: {

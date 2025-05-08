@@ -4,7 +4,7 @@ import {environment} from '../../../../../../environments/environment.developmen
 let token = environment.blizzardToken
 
 export const bearerInterceptor: HttpInterceptorFn = (req, next) => {
-  if (req.url.startsWith('http://localhost:3000')) {
+  if (req.url.startsWith('https://wow-citronela.onrender.com')) {
     return next(req);
   }
 

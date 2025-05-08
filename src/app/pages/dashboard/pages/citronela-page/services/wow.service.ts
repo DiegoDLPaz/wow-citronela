@@ -108,7 +108,7 @@ export class WowService {
   }
 
   exchangeCodeForToken(code: string): Observable<TokenResponse> {
-    return this.http.post<TokenResponse>('http://localhost:3000/api/token', {code});
+    return this.http.post<TokenResponse>('https://wow-citronela.onrender.com/api/token', {code});
   }
 
 }
