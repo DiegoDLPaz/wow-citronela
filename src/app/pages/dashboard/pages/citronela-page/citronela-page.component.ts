@@ -1,10 +1,9 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {WowService} from './services/wow.service';
-import {FactionColorPipe} from './pipes/faction-color.pipe';
-import {DatePipe, JsonPipe} from '@angular/common';
-import {ClassColorPipe} from './pipes/class-color.pipe';
 import {EnrichedCharacter} from './interfaces/EnrichedCharacter.interface';
 import {catchError, forkJoin, map, of, switchMap, throwError} from 'rxjs';
+import {CharactersTableComponent} from '../../../../shared/components/characters-table/characters-table.component';
+import {CharactersSelectComponent} from '../../../../shared/components/characters-select/characters-select.component';
 
 const citronelaChampsNames =
   ["BabyErnest", "AmandoRivas", "Robertico", "Dellazyr","Prospectode","Pablomötos","NayibSureño","NayibNorteño","Yayiersen","Penano"]
@@ -12,9 +11,8 @@ const citronelaChampsNames =
 @Component({
   selector: 'app-citronela-page',
   imports: [
-    FactionColorPipe,
-    DatePipe,
-    ClassColorPipe
+    CharactersTableComponent,
+    CharactersSelectComponent
   ],
   templateUrl: './citronela-page.component.html'
 })

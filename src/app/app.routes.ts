@@ -5,6 +5,7 @@ import {CitronelaPageComponent} from './pages/dashboard/pages/citronela-page/cit
 import {CallbackComponent} from './pages/dashboard/pages/callback/callback.component';
 import {MisPersonajesPageComponent} from './pages/dashboard/pages/mis-personajes-page/mis-personajes-page.component';
 import {LostVikingsPageComponent} from './pages/dashboard/pages/lost-vikings-page/lost-vikings-page.component';
+import {CharacterPageComponent} from './pages/dashboard/pages/character-page/character-page.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,11 @@ export const routes: Routes = [
         component: CitronelaPageComponent
       },
       {
+        path: 'personaje/:nombre',
+        title: 'Personaje',
+        component: CharacterPageComponent
+      },
+      {
         path: 'mis-personajes',
         title: 'Mis Personajes',
         component: MisPersonajesPageComponent
@@ -31,6 +37,11 @@ export const routes: Routes = [
         title: 'Lost Vikings',
         component: LostVikingsPageComponent
       },
+      // {
+      //   path: 'auction',
+      //   title: 'Subastas',
+      //   component: AuctionPageComponent
+      // },
       {
         path: 'callback',
         title: 'Callback',

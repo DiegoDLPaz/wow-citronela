@@ -6,13 +6,14 @@ import {catchError, forkJoin, map, Observable, of, switchMap, throwError} from '
 import {FactionColorPipe} from '../citronela-page/pipes/faction-color.pipe';
 import {DatePipe} from '@angular/common';
 import {ClassColorPipe} from '../citronela-page/pipes/class-color.pipe';
+import {CharactersTableComponent} from '../../../../shared/components/characters-table/characters-table.component';
+import {CharactersSelectComponent} from '../../../../shared/components/characters-select/characters-select.component';
 
 @Component({
   selector: 'app-mis-personajes-page',
   imports: [
-    FactionColorPipe,
-    DatePipe,
-    ClassColorPipe
+    CharactersTableComponent,
+    CharactersSelectComponent
   ],
   templateUrl: './mis-personajes-page.component.html'
 })

@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "gen:assets": "node scripts/generate-assets.js",
     "start:server": "node server/index.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

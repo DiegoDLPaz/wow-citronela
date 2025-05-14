@@ -1,7 +1,4 @@
 import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
-import { ClassColorPipe } from '../citronela-page/pipes/class-color.pipe';
-import { DatePipe } from '@angular/common';
-import { FactionColorPipe } from '../citronela-page/pipes/faction-color.pipe';
 import { EnrichedCharacter } from '../citronela-page/interfaces/EnrichedCharacter.interface';
 import { WowService } from '../citronela-page/services/wow.service';
 import { Character, GuildMember } from '../citronela-page/interfaces/guild-member.interface';
@@ -14,11 +11,12 @@ import {
   throwError,
   Observable
 } from 'rxjs';
+import {CharactersTableComponent} from '../../../../shared/components/characters-table/characters-table.component';
 
 @Component({
   selector: 'app-lost-vikings-page',
   standalone: true,
-  imports: [ClassColorPipe, DatePipe, FactionColorPipe],
+  imports: [ CharactersTableComponent],
   templateUrl: './lost-vikings-page.component.html'
 })
 export class LostVikingsPageComponent implements OnInit {

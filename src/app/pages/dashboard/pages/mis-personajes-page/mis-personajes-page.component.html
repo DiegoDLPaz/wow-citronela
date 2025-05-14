@@ -1,65 +1,10 @@
 <div class="mx-5 my-2">
-  @if (token() != ""){
+  @if (token() != "") {
     <h1 class="text-2xl font-bold mb-1">Personajes del usuario</h1>
     <div class="flex mb-4 gap-2 items-center">
-      <h2 class="text-xl">Ordenar Por:</h2>
-      <select class="select" #sortBy (change)="sortCharacters(sortBy.value)">
-        <option value="defecto" disabled selected>Defecto</option>
-        <option value="nombre">Nombre</option>
-        <option value="nivel">Nivel</option>
-        <option value="ilevel">ILevel</option>
-        <option value="raza">Raza</option>
-        <option value="clase">Clase</option>
-        <option value="ultima">Última conexión</option>
-        <option value="faccion">Facción</option>
-      </select>
+      <app-characters-select [characters]="enrichedCharacters()"/>
     </div>
-    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-      <table class="table">
-        <!-- head -->
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Imagen</th>
-          <th>Nombre</th>
-          <th>Nivel</th>
-          <th>iLevel</th>
-          <th>Raza</th>
-          <th>Clase</th>
-          <th>Última conexión</th>
-          <th>Facción</th>
-        </tr>
-        </thead>
-        <tbody>
-          @for (account of userProfile()?.wow_accounts; track account.id) {
-            @for (champ of enrichedCharacters(); track $index){
-              <tr>
-                <th>{{$index +1}}</th>
-                <td>
-                  <div class="flex items-center gap-3">
-                    <div class="avatar">
-                      <div class="mask mask-squircle h-16 w-16">
-                        <img
-                          [src]="champ.mediaUrl"
-                          alt="Character portrait"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td>{{champ.name}}</td>
-                <td>{{champ.level}}</td>
-                <td>{{champ.iLevel}}</td>
-                <td>{{champ.race}}</td>
-                <td [style.color]="champ.class | classColor">{{champ.class}}</td>
-                <td>{{formatPlayTime(+champ.lastPlayed) | date: 'dd/MM/yyyy HH:mm'}}</td>
-                <td [style.color]="champ.faction | factionColor">{{champ.faction}}</td>
-              </tr>
-            }
-          }
-        </tbody>
-      </table>
-    </div>
+    <app-characters-table [characters]="enrichedCharacters()"/>
   } @else {
     <button class="btn btn-primary" (click)="obtenerPerfil()">Obtener mi perfil con Battle.Net</button>
   }

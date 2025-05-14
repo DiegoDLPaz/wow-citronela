@@ -8,6 +8,7 @@ import {CharacterSummary} from '../interfaces/character-summary.interface';
 import {PlayableRace} from '../interfaces/Race.interface';
 import {PlayableClass} from '../interfaces/Class.interface';
 import {GuildResponse} from '../interfaces/guild-response.interface';
+import {CharacterSpecialization} from '../interfaces/character-spec.interface';
 
 const namespaceProfile = 'profile-classic-eu';
 const namespaceStatic = 'static-classic-eu';
@@ -81,6 +82,11 @@ export class WowService {
     return this.http.get<CharacterSummary>(url).pipe(
       tap(res => this.summaryCache.set(key,res))
     );
+  }
+
+  getCharacterSpec(name:string):Observable<CharacterSpecialization>{
+    const url = `https://eu.api.blizzard.com/profile/wow/character/golemagg/${encodeURIComponent(name.toLowerCase())}/specializations?namespace=profile-classic-eu&locale=en_GB`
+    return this.http.get<CharacterSpecialization>(url)
   }
 
   getRace(id: number): Observable<PlayableRace> {

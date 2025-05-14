@@ -1,19 +1,10 @@
 import { Component } from '@angular/core';
-import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
-import {MatToolbar} from '@angular/material/toolbar';
-import {MatNavList} from '@angular/material/list';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {map, shareReplay} from 'rxjs';
 
 @Component({
   selector: 'app-side-nav',
-  imports: [
-    MatSidenavContainer,
-    MatSidenavContent,
-    MatToolbar,
-    MatNavList,
-    MatSidenav
-  ],
+  imports: [],
   templateUrl: './side-nav.component.html'
 })
 export class SideNavComponent {
