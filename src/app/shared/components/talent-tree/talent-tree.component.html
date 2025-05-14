@@ -1,0 +1,80 @@
+<div class="flex flex-col space-y-2">
+  <!-- Header -->
+  <div class="flex items-center space-x-2">
+    <button
+      class="w-12 h-12 bg-cover rounded"
+      [ngStyle]="{ 'background-image': 'url(' + treeData.icon + ')' }"
+      (click)="clear()"
+      title="Reset {{ treeName }}"
+    ></button>
+    <h2 class="text-xl font-bold flex-1">{{ treeName }}</h2>
+    <p class="text-sm">Points spent: {{ ts.getTreePointsSpent(treeName) }}</p>
+  </div>
+
+  <!-- Grid -->
+  <div
+    class="relative grid bg-cover mx-auto px-5 py-5"
+    [ngStyle]="{
+      'background-image': 'url(' + treeData.background + ')',
+      'grid-template-rows': 'repeat(7,80px)',
+      'grid-template-columns': 'repeat(4,80px)',
+      width: '320px',
+      height: '560px'
+    }"
+  >
+    <ng-container *ngFor="let entry of treeData.talents | keyvalue">
+      <ng-container *ngIf="entry?.value?.icon">
+        <div
+          class="relative flex items-center justify-center cursor-pointer w-12 h-12"
+          [ngStyle]="{
+        'grid-row': toGrid(entry.value.pos).row,
+        'grid-column': toGrid(entry.value.pos).col
+      }"
+          (click)="ts.spendPoint(treeName, entry.key)"
+          (contextmenu)="$event.preventDefault(); ts.unspendPoint(treeName, entry.key)"
+          (mouseenter)="hoveredTalent = entry"
+          (mouseleave)="hoveredTalent = null"
+          (mousemove)="onMouseMove($event)"
+          [ngClass]="{ 'ring ring-yellow-400': hoveredTalent?.key === entry.key }"
+        >
+          <img [src]="entry.value.icon" class="w-12 h-12 transition duration-200"
+               [class.grayscale]="ts.getTalentRank(treeName, entry.key) === 0"/>
+          <div class="absolute bottom-1 right-1 bg-black bg-opacity-60 text-white text-xs px-1 rounded">
+            {{ ts.getTalentRank(treeName, entry.key) }}/{{ entry.value.maxRank }}
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <div
+      *ngIf="hoveredTalent"
+      class="fixed z-50 bg-black bg-opacity-90 text-white text-sm p-3 rounded shadow-lg w-60 pointer-events-none"
+      [ngStyle]="{ top: tooltipY + 10 + 'px', left: tooltipX + 10 + 'px' }"
+    >
+      <h3 class="font-bold">{{ hoveredTalent.key }}</h3>
+      <p>{{ hoveredTalent.value.description(Math.max(1, ts.getTalentRank(treeName, hoveredTalent.key))) }}</p>
+      <p class="mt-1 text-xs text-gray-300">Rank: {{ ts.getTalentRank(treeName, hoveredTalent.key) }}/{{ hoveredTalent.value.maxRank }}</p>
+    </div>
+    <!-- Arrows Layer -->
+    <svg class="absolute top-0 left-0 w-full h-full pointer-events-none">
+      <defs>
+        <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L6,3 z" fill="white"/>
+        </marker>
+      </defs>
+      <ng-container *ngFor="let entry of treeData.talents | keyvalue">
+        <ng-container *ngIf="entry.value.arrows">
+          <ng-container *ngFor="let a of entry.value.arrows">
+            <line
+              [attr.x1]="getArrowStart(a.from).x"
+              [attr.y1]="getArrowStart(a.from).y"
+              [attr.x2]="getArrowEnd(a.to).x"
+              [attr.y2]="getArrowEnd(a.to).y"
+              stroke="white" stroke-width="2" marker-end="url(#arrowhead)"
+            />
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </svg>
+  </div>
+</div>

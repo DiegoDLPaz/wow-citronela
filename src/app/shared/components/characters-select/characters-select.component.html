@@ -1,0 +1,11 @@
+<h2 class="text-xl">Ordenar Por:</h2>
+<select class="select" #sortBy (change)="sortCharacters(sortBy.value)">
+  <option value="defecto" disabled selected>Defecto</option>
+  <option value="nombre">Nombre</option>
+  <option value="nivel">Nivel</option>
+  <option value="ilevel">ILevel</option>
+  <option value="raza">Raza</option>
+  <option value="clase">Clase</option>
+  <option value="ultima">Última conexión</option>
+  <option value="faccion">Facción</option>
+</select>

@@ -1,0 +1,63 @@
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+  <table class="table">
+    <!-- head -->
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Imagen</th>
+      <th>Nombre</th>
+      <th>Nivel</th>
+      <th>iLevel</th>
+      <th>Raza</th>
+      <th>Clase</th>
+      <th>Última conexión</th>
+      <th>Facción</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (champ of characters(); track $index){
+          <tr routerLink="/personaje/{{champ.name}}" class="cursor-pointer hover:bg-base-200">
+            <th>{{$index +1}}</th>
+            <td>
+              <div class="flex items-center gap-3">
+                <div class="avatar">
+                  <div class="mask mask-squircle h-16 w-16">
+                    <img
+                      [src]="champ.mediaUrl"
+                      alt="Character portrait"
+                    />
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <p>
+                  {{champ.name}}
+                </p>
+                @if (champ.iLevel < 300){
+                  <p class="badge badge-primary font-bold">MID</p>
+                } @else {
+                  <p class="badge badge-error font-bold">GOD</p>
+                }
+              </div>
+            </td>
+            <td>{{champ.level}}</td>
+            <td>{{champ.iLevel}}</td>
+            <td>{{champ.race}}</td>
+            <td [style.color]="champ.class | classColor">{{champ.class}}</td>
+            <td>{{formatPlayTime(+champ.lastPlayed) | date: 'dd/MM/yyyy HH:mm'}}</td>
+            <td [style.color]="champ.faction | factionColor">
+              <div class="flex gap-3 items-center">
+                <img class="w-9 h-11" [src]="champ.faction | factionIcon">
+                <p>
+                  {{champ.faction}}
+                </p>
+              </div>
+
+            </td>
+          </tr>
+      }
+    </tbody>
+  </table>
+</div>

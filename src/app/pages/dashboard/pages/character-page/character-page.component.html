@@ -1,0 +1,45 @@
+<div class="flex flex-col mx-5 my-1">
+  <div class="flex gap-3 items-center font-bold">
+    <img class="w-22 h-22 rounded" [src]="champMediaResource.value()?.assets![0].value!">
+    <p class="text-3xl">{{champName}}</p>
+    @if (champResource.value()?.equipped_item_level! > 300) {
+      <p class="badge badge-error">GOD</p>
+    } @else {
+      <p class="badge badge-primary">MID</p>
+    }
+    <p></p>
+  </div>
+
+  <!-- Display Active Spec -->
+
+  @if (champSpecResource.isLoading() || champResource.isLoading() || champMediaResource.isLoading()){
+    <div class="items-center justify-center min-h-screen">
+      <span class="loading loading-dots loading-xl"></span>
+    </div>
+  } @else {
+    <div class="mt-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <img class="w-14 h-14" src="./assets/icons/class_{{champResource.value()?.character_class!.name!.toLowerCase()}}.jpg">
+          <h2 class="text-xl font-bold">
+            {{ champResource.value()?.character_class!.name! || '—' }}
+          </h2>
+        </div>
+
+        <div class="flex items-center justify-center gap-5 my-4">
+          @for (spec of specGroup()!.specializations!; track $index) {
+            <app-talent-tree
+              *ngIf="treeExists(champResource.value()?.character_class!.name!, spec.specialization_name)"
+              [className]="champResource.value()!.character_class!.name!"
+              [treeName]="spec.specialization_name"
+            ></app-talent-tree>
+          }
+        </div>
+      </div>
+    </div>
+
+  }
+
+
+
+</div>
